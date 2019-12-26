@@ -1,0 +1,154 @@
+@import "../assets/variables/styleVar.scss";
+
+/* Fonts */
+@font-face {
+  font-family: "Bebas";
+  src: url("../assets/fonts/BebasNeue-Bold.ttf");
+  src: url("../assets/fonts/BebasNeue-Bold.ttf") format("ttf"),
+  url("../assets/fonts/BebasNeue-Bold.otf") format("opentype");
+  }
+
+  /* Header + Banner */
+#header {
+	background-color: $dark;
+	background-image: linear-gradient(to bottom, #0003, transparent);
+	border-bottom: 1px solid $darkBlue;
+	box-shadow: 0 0 2px $darkBlue;
+  font-size: 2em;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 90px;
+  width: 100%;
+  z-index: 1;
+}
+
+.content{
+  position: relative;
+  top: 90px;
+}
+
+.banner {
+	color: $grey;
+  padding: .80em;
+  margin-left: 20px;
+  font-family: 'Bebas';
+  text-align: left;
+  width: 100%;
+}
+
+@media (max-width:320px)  { /* smartphones, portrait iPhone, portrait 480x320 phones (Android) Iphone 5 de merde */
+  .banner {
+    font-size: 28px;
+    margin-top: 6px;
+  }
+ }
+
+
+/* SideBar */
+#sidebarMenu {
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 90px;
+    width: 250px;
+    transform: translateX(-250px);
+    transition: transform 250ms ease-in-out;
+    background: linear-gradient(180deg, $dark 0%, $darkBlue 100%);
+    z-index: 1;
+}
+.sidebarMenuInner{
+    margin:0;
+    padding:0;
+    border-top: 1px solid rgba($grey, 0.10);
+}
+.sidebarMenuInner li{
+    list-style: none;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 20px;
+    cursor: pointer;
+    border-bottom: 1px solid rgba($grey, 0.10);
+}
+.sidebarMenuInner li span{
+    display: block;
+    font-size: 14px;
+    color: rgba($grey, 0.50);
+}
+.sidebarMenuInner li a{
+    color: $grey;
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+/* Burger Menu */
+input[type="checkbox"]:checked ~ #sidebarMenu {
+    transform: translateX(0);
+}
+
+input[type=checkbox] {
+    transition: all 0.3s;
+    box-sizing: border-box;
+    display: none;
+}
+.sidebarIconToggle {
+    transition: all 0.3s;
+    box-sizing: border-box;
+    cursor: pointer;
+    position: fixed;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+    top: 36px;
+    left: 15px;
+    height: 22px;
+    width: 22px;
+}
+.spinner {
+    transition: all 0.3s;
+    box-sizing: border-box;
+    position: absolute;
+    height: 3px;
+    width: 100%;
+    background-color: $grey;
+}
+.horizontal {
+    transition: all 0.3s;
+    box-sizing: border-box;
+    position: relative;
+    float: left;
+    margin-top: 3px;
+}
+.diagonal.part-1 {
+    position: relative;
+    transition: all 0.3s;
+    box-sizing: border-box;
+    float: left;
+}
+.diagonal.part-2 {
+    transition: all 0.3s;
+    box-sizing: border-box;
+    position: relative;
+    float: left;
+    margin-top: 3px;
+}
+input[type=checkbox]:checked ~ .sidebarIconToggle > .horizontal {
+    transition: all 0.3s;
+    box-sizing: border-box;
+    opacity: 0;
+}
+input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-1 {
+    transition: all 0.3s;
+    box-sizing: border-box;
+    transform: rotate(135deg);
+    margin-top: 8px;
+}
+input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
+    transition: all 0.3s;
+    box-sizing: border-box;
+    transform: rotate(-135deg);
+    margin-top: -9px;
+}

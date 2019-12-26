@@ -1,0 +1,4 @@
+@import '~@angular/material/theming';
+@import "./assets/variables/styleVar.scss";
+@include mat-core();
+

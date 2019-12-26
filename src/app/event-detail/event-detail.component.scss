@@ -1,0 +1,63 @@
+// Utilities
+@import "../../assets/variables/styleVar.scss";
+
+.listSigned{
+  padding: 10px;
+
+  th{
+    font-weight: bold;
+    text-transform: uppercase;
+    background: $orange;
+  }
+  table {
+    width: 100%;
+    cursor: pointer;
+  }
+
+  tr.example-detail-row {
+    height: 0;
+  }
+
+  tr.example-element-row:not(.example-expanded-row):hover {
+    background: #777;
+  }
+
+  tr.example-element-row:not(.example-expanded-row):active {
+    background: #efefef;
+  }
+
+  .example-element-row td {
+    border-bottom-width: 0;
+  }
+
+  .example-element-detail {
+    overflow: hidden;
+    display: flex;
+  }
+
+  .example-element-description {
+    padding: 16px;
+  }
+
+  .example-element-description-attribution {
+    opacity: 0.5;
+  }
+}
+
+.formulaire{
+  padding: 20px;
+
+  .inputs{
+    margin: 15px auto;
+
+    .mat-form-field{
+      width: 100%;
+    }
+  }
+
+  .fullWidth{
+    width: 100%;
+    min-height: 50px;
+  }
+
+}

@@ -1,0 +1,12 @@
+.eventsList{
+  padding: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+.event {
+  width: 300px;
+  margin: 10px;
+}
+
