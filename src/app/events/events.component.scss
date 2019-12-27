@@ -25,6 +25,7 @@
 .town{
   width: 30%;
   min-height: 50px;
+  margin: 5px auto;
   background: $orange;
   color: white;
 }
@@ -32,6 +33,7 @@
 .allTown{
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-between;
 }
 

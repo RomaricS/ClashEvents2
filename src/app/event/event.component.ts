@@ -76,7 +76,7 @@ export class EventComponent implements OnInit {
     }
     console.log(this.event);
 
-    this.serv;
+    this.serv.addEvent(this.event);
     // SnackBar
     this.snackBar.open('Event created', 'Sure', {
       duration: 10000,
