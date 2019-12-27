@@ -65,7 +65,11 @@ export class EventDetailComponent implements OnInit {
     // Get icon based on TH level
     this.playerData.icon = Icons[this.playerData.level];
     // Add new player to existing list
-    this.event.playersList.push(this.playerData);
+    if (this.event.playersList) {
+      this.event.playersList.push(this.playerData);
+    } else {
+      this.event.playersList = new Array(this.playerData);
+    }
 
     // Update the event by sending the new object
     this.serv.addPlayer(this.event, this.id, this.event.key);
@@ -87,17 +91,19 @@ export class EventDetailComponent implements OnInit {
     this.serv.getEventbyId(id).subscribe(res => {
       this.event = res[0];
       // Sort the playerList Table : desc
-      this.dataSource = this.event.playersList.sort((a, b) => {
-        const c = a.level;
-        const d = b.level;
-        if (c > d) {
-          return -1;
-        }
-        if (c < d) {
-          return 1;
-        }
-        return 0;
-      });
+      if (this.event.playersList) {
+        this.dataSource = this.event.playersList.sort((a, b) => {
+          const c = a.level;
+          const d = b.level;
+          if (c > d) {
+            return -1;
+          }
+          if (c < d) {
+            return 1;
+          }
+          return 0;
+        });
+      }
       this.thList = this.event.townhall.filter(th => th.state);
     },
     err => console.log(err));

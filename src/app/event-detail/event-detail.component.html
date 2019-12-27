@@ -43,8 +43,9 @@
 
   <!-- Table -->
   <div class="listSigned">
-    <h2 class="centerText" *ngIf="event.active" >The list so Far</h2>
+    <h2 class="centerText" *ngIf="event.active && dataSource" >The list so Far</h2>
     <h2 class="centerText" *ngIf="!event.active">The final list</h2>
+    <h2 class="centerText" *ngIf="event.active && !dataSource">Nobody yet!!!</h2>
     <table
       mat-table
       [dataSource]="dataSource"

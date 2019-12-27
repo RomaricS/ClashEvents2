@@ -11,7 +11,6 @@ import { EventService } from '../event.service';
 export class EventComponent implements OnInit {
 
   event: Event = {
-    key: '',
     title: '',
     id: '',
     picture: '',
@@ -74,11 +73,14 @@ export class EventComponent implements OnInit {
     if (this.event.picture === '') {
       this.event.picture = 'https://pbs.twimg.com/profile_images/1142194267319873541/imd-tTed_400x400.jpg';
     }
+    this.event.startsAt = new Date(this.event.startsAt).toLocaleDateString();
     console.log(this.event);
 
+    // Send data to db
     this.serv.addEvent(this.event);
+
     // SnackBar
-    this.snackBar.open('Event created', 'Sure', {
+    this.snackBar.open('Event created', 'Ok', {
       duration: 10000,
     });
 

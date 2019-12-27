@@ -1,4 +1,4 @@
-<div class="eventsList">
+<div class="eventsList" *ngIf="showEv" >
   <div *ngFor="let event of eventList">
     <mat-card class="event">
       <mat-card-header>
@@ -23,5 +23,11 @@
       </mat-card-actions>
     </mat-card>
   </div>
+</div>
+
+<div *ngIf="!showEv" class="error verticalCenter">
+  <span class="">
+    No Event right now
+  </span>
 </div>
 

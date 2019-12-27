@@ -17,7 +17,7 @@
       <mat-form-field>
         <input matInput [min]="startDate" [matDatepicker]="picker" placeholder="Sign up will be closed on *" [(ngModel)]="event.startsAt" name="date">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
+        <mat-datepicker touchUi #picker></mat-datepicker>
       </mat-form-field>
 
       <div>Open to</div>

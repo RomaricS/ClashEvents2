@@ -12,6 +12,8 @@ import { EventService } from '../event.service';
 export class EventsComponent implements OnInit {
 
   eventList: Event[];
+  showEv = true;
+
   constructor(private serv: EventService) { }
 
   ngOnInit() {
@@ -20,10 +22,11 @@ export class EventsComponent implements OnInit {
 
   loadEvents() {
     this.serv.getEvents().subscribe(res => {
-      if (res) {
+      if (res && res.length > 0) {
         this.eventList = res.map(this.castData, this).filter(ev => ev.active);
         console.log(this.eventList);
       } else {
+        this.showEv = false;
         console.log('NO DATA');
       }
     },
