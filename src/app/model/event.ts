@@ -1,17 +1,11 @@
 import { Player } from './player';
+import { Hall } from './hall';
 export class Event {
   title: string;
   id: string;
+  picture: string;
   startsAt: string;
   active: boolean;
-  townhall: {
-    th13: boolean;
-    th12: boolean;
-    th11: boolean;
-    th10: boolean;
-    th9: boolean;
-    th8: boolean;
-    th7: boolean;
-  };
+  townhall: Hall[];
   playersList: Player[];
 }

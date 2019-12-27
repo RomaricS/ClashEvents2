@@ -1,20 +1,17 @@
 import { Event } from './../model/event';
 import { Component, OnInit } from '@angular/core';
 import { EventService } from '../event.service';
-import { database } from 'firebase';
-import { Observable } from 'rxjs';
+
 
 @Component({
   selector: 'app-events',
   templateUrl: './events.component.html',
-  styleUrls: ['./events.component.scss']
+  styleUrls: ['./events.component.scss'],
+  providers: [EventService]
 })
 export class EventsComponent implements OnInit {
 
-  eventList: Observable<any>;
-
-  ev: Event[];
-
+  eventList: Event[];
   constructor(private serv: EventService) { }
 
   ngOnInit() {
@@ -22,15 +19,13 @@ export class EventsComponent implements OnInit {
   }
 
   loadEvents() {
-    this.eventList = this.serv.getEvents();
-    this.eventList.subscribe(res => {
+    this.serv.getEvents().subscribe(res => {
       if (res) {
-        this.ev = res.map(this.castData);
+        this.eventList = res.map(this.castData, this);
         console.log(this.eventList);
       } else {
         console.log('NO DATA');
       }
-
     });
   }
 
@@ -38,9 +33,10 @@ export class EventsComponent implements OnInit {
     const data: Event = {
         title: d.title,
         id: d.id,
+        picture: d.picture || 'https://i.ytimg.com/vi/r2BFeSUkNCI/maxresdefault.jpg',
         startsAt: d.startsAt,
         active: d.active,
-        townhall: d.townhall,
+        townhall: d.townhall.filter(hall => hall.state),
         playersList: d.playersList
     };
     return data;

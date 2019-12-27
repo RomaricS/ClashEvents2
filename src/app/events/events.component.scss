@@ -1,3 +1,6 @@
+// Utilities
+@import "../../assets/variables/styleVar.scss";
+
 .eventsList{
   padding: 30px;
   display: flex;
@@ -8,5 +11,27 @@
 .event {
   width: 300px;
   margin: 10px;
+}
+
+.icone{
+  width: 40px;
+  height: 40px;
+}
+
+.openTo{
+  min-height: 50px;
+  width: 100%;
+}
+.town{
+  width: 30%;
+  min-height: 50px;
+  background: $orange;
+  color: white;
+}
+
+.allTown{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 

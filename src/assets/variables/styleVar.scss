@@ -32,3 +32,33 @@ $lightOrange: #e67e22;
 .orangeBG{
   background: $orange;
 }
+
+.fullWidth{
+  width: 100%;
+  min-height: 50px;
+}
+
+@media (max-width:321px)  { /* smartphones, portrait iPhone, portrait 480x320 phones (Android) Iphone 5 de merde */
+  .event {
+    width: 275px!important;
+    margin: 10px!important;
+
+    img{
+      width: 100%!important;
+      margin: 0!important;
+    }
+  }
+ }
+
+ .upperC{
+   text-transform: uppercase;
+ }
+ .bold{
+   font-weight: 700;
+ }
+ .verticalCenter{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  text-align: center;
+ }

@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'clashEvents';
+  showOverlay = false;
+
+  constructor() { }
+
+  public toggle() {
+    this.showOverlay = !this.showOverlay;
+  }
 }

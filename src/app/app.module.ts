@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { EventsComponent } from './events/events.component';
 import { HomeComponent } from './home/home.component';
 import { EventDetailComponent } from './event-detail/event-detail.component';
+import { EventComponent } from './event/event.component';
 
 // Material Components
 import { MatCardModule } from '@angular/material/card';
@@ -18,14 +19,14 @@ import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { EventComponent } from './event/event.component';
+import { MatListModule } from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 // DB
 import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
-import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 
 // Services
@@ -50,11 +51,12 @@ import { EventService } from './event.service';
       MatTableModule,
       MatSelectModule,
       MatSnackBarModule,
+      MatListModule,
+      MatIconModule,
+      MatGridListModule,
       AngularFireModule.initializeApp(environment.firebase),
-      AngularFirestoreModule, // imports firebase/firestore, only needed for database features
       AngularFireDatabaseModule, // imports firebase/firestore, only needed for database features
-      AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
-      AngularFireStorageModule // imports firebase/storage only needed for storage features
+      AngularFireAuthModule
     ],
    providers: [EventService],
    bootstrap: [

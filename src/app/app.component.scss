@@ -44,6 +44,20 @@
   }
  }
 
+ /* Overlay */
+.overlay{
+  background: white;
+  opacity: 0.8;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  cursor: not-allowed;
+  transition: all ease-in 1s;
+}
 
 /* SideBar */
 #sidebarMenu {

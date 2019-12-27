@@ -4,7 +4,7 @@
   </div>
 </header>
 <input type="checkbox" class="openSidebarMenu" id="openSidebarMenu">
-  <label for="openSidebarMenu" class="sidebarIconToggle">
+  <label for="openSidebarMenu" class="sidebarIconToggle" (click)="toggle()">
     <div class="spinner diagonal part-1"></div>
     <div class="spinner horizontal"></div>
     <div class="spinner diagonal part-2"></div>
@@ -12,15 +12,18 @@
   <div id="sidebarMenu">
     <ul class="sidebarMenuInner">
       <li>Romaric <span>Web Developer</span></li>
-      <li><a routerLink="/home">Home</a></li>
-      <li><a routerLink="/events">View Events</a></li>
-      <li><a routerLink="/dashboard">Add Event</a></li>
-      <li><a routerLink="/dashboard">Charts</a></li>
-      <li><a routerLink="/dashboard">Misc</a></li>
+      <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
+      <li><a routerLink="/events" routerLinkActive="active">View Events</a></li>
+      <li><a routerLink="/dashboard" routerLinkActive="active">Add Event</a></li>
+      <li><a routerLink="/dashboard" routerLinkActive="active">Charts</a></li>
+      <li><a routerLink="/dashboard" routerLinkActive="active">Misc</a></li>
     </ul>
   </div>
+
   <div class="content">
     <router-outlet></router-outlet>
   </div>
+  <div class="overlay" *ngIf="showOverlay"></div>
+
 
 
