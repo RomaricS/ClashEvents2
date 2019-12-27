@@ -12,6 +12,7 @@
   table {
     width: 100%;
     cursor: pointer;
+    text-transform: uppercase;
   }
 
   tr.example-detail-row {
@@ -35,8 +36,13 @@
     display: flex;
   }
 
+  .comment{
+    background: $blueHole;
+    color: $grey;
+  }
   .example-element-description {
     padding: 16px;
+    text-transform: capitalize;
   }
 
   .example-element-description-attribution {

@@ -21,12 +21,13 @@ export class EventsComponent implements OnInit {
   loadEvents() {
     this.serv.getEvents().subscribe(res => {
       if (res) {
-        this.eventList = res.map(this.castData, this);
+        this.eventList = res.map(this.castData, this).filter(ev => ev.active);
         console.log(this.eventList);
       } else {
         console.log('NO DATA');
       }
-    });
+    },
+    err => console.log(err));
   }
 
   castData(d): Event {

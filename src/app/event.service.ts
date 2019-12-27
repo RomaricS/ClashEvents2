@@ -16,4 +16,15 @@ export class EventService {
     return this.db.list<Event>(this.pathEvent).valueChanges();
   }
 
+  // Get Event by Id
+  getEventbyId(id): Observable<Event[]> {
+    return this.db.list<Event>(this.pathEvent, ref => ref.orderByChild('id').equalTo(id)).valueChanges();
+  }
+
+  // Add a new player to an event
+  addPlayer(player) {
+    const obj = this.db.database.ref(this.pathEvent);
+    obj.push(player);
+  }
+
 }

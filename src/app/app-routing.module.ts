@@ -1,3 +1,4 @@
+import { EventComponent } from './event/event.component';
 import { HomeComponent } from './home/home.component';
 import { EventsComponent } from './events/events.component';
 import { NgModule } from '@angular/core';
@@ -8,6 +9,7 @@ import { EventDetailComponent } from './event-detail/event-detail.component';
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
+  { path: 'addEvent', component: EventComponent },
   { path: 'event/:id', component: EventDetailComponent },
   { path: 'events', component: EventsComponent }
 ];

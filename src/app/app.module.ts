@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
 
 // Routing
 import { AppRoutingModule } from './app-routing.module';
@@ -53,6 +54,7 @@ import { EventService } from './event.service';
       MatSnackBarModule,
       MatListModule,
       MatIconModule,
+      FormsModule,
       MatGridListModule,
       AngularFireModule.initializeApp(environment.firebase),
       AngularFireDatabaseModule, // imports firebase/firestore, only needed for database features
