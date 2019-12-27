@@ -1,3 +1,53 @@
-<div class="formulaire">
+  <div class="formulaire" *ngIf="showForm">
+    <h2 class="centerText">Create a new event</h2>
+    <form class="inputs">
 
-</div>
+      <mat-form-field>
+        <input matInput placeholder="Event Title *" [(ngModel)]="event.title" name="title"/>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Unique Id like cwlJan20 or 50warJan*" [(ngModel)]="event.id" name="id"/>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Event Image" [(ngModel)]="event.picture" name="picture"/>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput [min]="startDate" [matDatepicker]="picker" placeholder="Sign up will be closed on *" [(ngModel)]="event.startsAt" name="date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <div>Open to</div>
+      <section class="lvlCheck">
+        <mat-checkbox *ngFor="let th of event.townhall"  class="itemCheck" [(ngModel)]="th.state" name="townhall">{{th.level | uppercase}}</mat-checkbox>
+      </section>
+    </form>
+    <button
+      mat-raised-button
+      class="fullWidth darkBG"
+      color="primary"
+      [disabled]="!isFormValid()"
+      (click)="openSnackBar()">
+      Create
+    </button>
+  </div>
+  <div *ngIf="!showForm" class="btnToggle btnAddEvent">
+    <button
+    mat-raised-button
+    class="fullWidth darkredBG"
+    color="primary"
+    (click)="toggleForm()">
+    Create another event
+  </button>
+
+  <button
+  mat-raised-button
+  class="fullWidth darkBG"
+  color="primary"
+  routerLink="/events" routerLinkActive="active">
+  See all events
+</button>
+  </div>

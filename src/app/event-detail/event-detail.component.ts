@@ -3,10 +3,8 @@ import { Player } from './../model/player';
 import { Event } from './../model/event';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Location } from '@angular/common';
 
 import {MatSnackBar} from '@angular/material/snack-bar';
-import { MatSort } from '@angular/material/sort';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { EventService } from '../event.service';
 
@@ -43,17 +41,24 @@ export class EventDetailComponent implements OnInit {
     comment: ''
   };
 
+  // Event Id
+  id: string;
+
+  // Form toggle
+  showForm = true;
+
   constructor(
     private route: ActivatedRoute,
     public router: Router,
     private snackBar: MatSnackBar,
     private serv: EventService) {  }
 
-  @ViewChild(MatSort, {static: false}) sort: MatSort;
-
   ngOnInit() {
   // Get event id from url
-  this.route.params.subscribe(params => this.loadEventData(params.id));
+  this.route.params.subscribe(params => {
+    this.id = params.id;
+    this.loadEventData(this.id);
+  });
   }
 
   openSnackBar() {
@@ -61,13 +66,17 @@ export class EventDetailComponent implements OnInit {
     this.playerData.icon = Icons[this.playerData.level];
     // Add new player to existing list
     this.event.playersList.push(this.playerData);
-    console.log(this.playerData);
 
     // Update the event by sending the new object
-    this.serv.addPlayer(this.event);
-    this.snackBar.open('Player added to Event list', 'Yosh', {
-      duration: 2000,
+    this.serv.addPlayer(this.event, this.id, this.event.key);
+
+    // SnackBar
+    this.snackBar.open('Nice, clash on', 'Got it!', {
+      duration: 10000,
     });
+
+    // Hide the form to prevent multiple unwanted entries
+    this.toggleForm();
   }
 
   isFormValid(): boolean {
@@ -77,11 +86,31 @@ export class EventDetailComponent implements OnInit {
   loadEventData(id): void {
     this.serv.getEventbyId(id).subscribe(res => {
       this.event = res[0];
-      this.dataSource = this.event.playersList;
+      // Sort the playerList Table : desc
+      this.dataSource = this.event.playersList.sort((a, b) => {
+        const c = a.level;
+        const d = b.level;
+        if (c > d) {
+          return -1;
+        }
+        if (c < d) {
+          return 1;
+        }
+        return 0;
+      });
       this.thList = this.event.townhall.filter(th => th.state);
-      console.table(this.thList);
     },
     err => console.log(err));
+  }
+
+  toggleForm(): void {
+    this.showForm = !this.showForm;
+    this.playerData = {
+      name: '',
+      level: '',
+      icon: '',
+      comment: ''
+    };
   }
 
 }

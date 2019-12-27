@@ -1,6 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
-
+@import "./assets/variables/styleVar.scss";
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.itemCheck{
+  .mat-checkbox-inner-container {
+    height: 25px!important;
+    width: 25px!important;
+  }
+}
+.mat-checkbox-checked.mat-accent .mat-checkbox-background{
+  background-color: $darkred!important;
+}

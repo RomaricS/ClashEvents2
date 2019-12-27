@@ -18,4 +18,4 @@ export const Icons = {
   th8: 'https://vignette.wikia.nocookie.net/clashofclans/images/f/fa/Town_Hall8.png/revision/latest/scale-to-width-down/100?cb=20170827051039',
   // tslint:disable-next-line: max-line-length
   th7: 'https://vignette.wikia.nocookie.net/clashofclans/images/7/75/Town_Hall7.png/revision/latest/scale-to-width-down/100?cb=20170827051024'
-}
+};

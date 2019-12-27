@@ -33,10 +33,8 @@ $lightOrange: #e67e22;
 .orangeBG{
   background: $orange;
 }
-
-.fullWidth{
-  width: 100%;
-  min-height: 50px;
+.darkredBG{
+  background: $darkred;
 }
 
 @media (max-width:321px)  { /* smartphones, portrait iPhone, portrait 480x320 phones (Android) Iphone 5 de merde */
@@ -50,7 +48,7 @@ $lightOrange: #e67e22;
     }
   }
  }
-
+/* Misc */
  .upperC{
    text-transform: uppercase;
  }
@@ -65,4 +63,31 @@ $lightOrange: #e67e22;
  }
 .centerText{
   text-align: center;
+}
+
+.fullWidth{
+  width: 100%;
+  min-height: 50px;
+}
+
+.cube{
+  width: 30px;
+  height: 30px;
+}
+
+/* Formulaire */
+.formulaire{
+  padding: 20px;
+
+  .inputs{
+    margin: 15px auto;
+
+    .mat-form-field{
+      width: 100%;
+    }
+  }
+}
+
+.btnToggle{
+  margin: 20px auto;
 }

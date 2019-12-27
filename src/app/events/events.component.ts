@@ -32,6 +32,7 @@ export class EventsComponent implements OnInit {
 
   castData(d): Event {
     const data: Event = {
+        key: d.key,
         title: d.title,
         id: d.id,
         picture: d.picture || 'https://i.ytimg.com/vi/r2BFeSUkNCI/maxresdefault.jpg',

@@ -1,8 +1,8 @@
 <div *ngIf="event">
-  <div class="formulaire">
+  <div class="formulaire" *ngIf="showForm && event.active" >
     <h2 class="centerText">Sign up for {{ event.title }}</h2>
     <div>
-      We are spinning on <span class="orange">{{ event.startsAt }}</span>
+      The list will be closed  : <span class="orange">{{ event.startsAt }}</span>
     </div>
     <form class="inputs">
       <mat-form-field>
@@ -31,10 +31,20 @@
       Validate
     </button>
   </div>
+  <div *ngIf="!showForm" class="btnToggle">
+    <button
+    mat-raised-button
+    class="fullWidth darkredBG"
+    color="primary"
+    (click)="toggleForm()">
+    Add another player
+  </button>
+  </div>
 
   <!-- Table -->
   <div class="listSigned">
-    <h2 class="centerText">They've already signed up</h2>
+    <h2 class="centerText" *ngIf="event.active" >The list so Far</h2>
+    <h2 class="centerText" *ngIf="!event.active">The final list</h2>
     <table
       mat-table
       [dataSource]="dataSource"
@@ -44,7 +54,10 @@
         matColumnDef="{{ column }}"
         *ngFor="let column of columnsToDisplay">
         <th mat-header-cell *matHeaderCellDef>{{ column }}</th>
-        <td mat-cell *matCellDef="let element">{{ element[column] }}</td>
+        <td mat-cell *matCellDef="let element">
+          <div *ngIf="column !== 'icon'">{{ element[column] }}</div>
+          <div *ngIf="column === 'icon'"><img src="{{ element[column] }}" alt="icon" class="cube"></div>
+        </td>
       </ng-container>
 
       <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->

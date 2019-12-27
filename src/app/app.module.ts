@@ -23,6 +23,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatNativeDateModule } from '@angular/material/core';
 
 // DB
 import { environment } from '../environments/environment';
@@ -32,6 +35,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 
 // Services
 import { EventService } from './event.service';
+
 
 
 @NgModule({
@@ -56,6 +60,9 @@ import { EventService } from './event.service';
       MatIconModule,
       FormsModule,
       MatGridListModule,
+      MatDatepickerModule,
+      MatCheckboxModule,
+      MatNativeDateModule,
       AngularFireModule.initializeApp(environment.firebase),
       AngularFireDatabaseModule, // imports firebase/firestore, only needed for database features
       AngularFireAuthModule
