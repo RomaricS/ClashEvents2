@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EventService } from './event.service';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -11,21 +11,24 @@ export class AppComponent implements OnInit {
   title = 'clashEvents';
   showOverlay = false;
 
+  mySubscription: any;
+
   isAuth = false;
 
-  constructor(private router: Router,
-              private serv: EventService) { }
+constructor(private router: Router,
+            private serv: EventService) {}
 
-  ngOnInit() {
-    this.isAuth = this.serv.isAuthenticated();
-  }
+ngOnInit() {
+  this.isAuth = this.serv.isAuthenticated();
+}
 
-  public toggle() {
-    this.showOverlay = !this.showOverlay;
-  }
+public toggle() {
+  this.showOverlay = !this.showOverlay;
+}
 
-  logOut(): void {
+logOut(): void {
     this.serv.logout();
     this.router.navigate(['/admin']);
+    document.location.reload();
   }
 }

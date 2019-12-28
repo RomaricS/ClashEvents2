@@ -38,7 +38,8 @@ connect(): void {
     this.snackBar.open('Welcome', 'Thanks', {
       duration: 2000,
     });
-    this.router.navigate(['/events']);
+    // this.router.navigate(['/events']);
+    document.location.reload();
   } else {
     // GTFO
     this.snackBar.open('Wrong login/password', 'Retry', {

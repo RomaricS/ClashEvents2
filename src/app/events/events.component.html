@@ -19,7 +19,7 @@
         </div>
       </mat-card-content>
       <mat-card-actions>
-      <button mat-raised-button class="fullWidth darkBG" color="primary" routerLink="/event/{{event.id}}">I'm In</button>
+      <button mat-raised-button class="fullWidth darkBG" color="primary" routerLink="/event/{{event.id}}">Details</button>
       <button mat-raised-button *ngIf="isAuth" (click)="delete(event.key)" class="fullWidth darkredBG" color="primary">Delete this event</button>
       </mat-card-actions>
     </mat-card>

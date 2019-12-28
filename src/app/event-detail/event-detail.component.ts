@@ -24,7 +24,7 @@ import { EventService } from '../event.service';
 export class EventDetailComponent implements OnInit {
   // data for the table
   dataSource: Player[];
-  columnsToDisplay = ['name', 'level', 'icon'];
+  columnsToDisplay = ['name', 'level', 'icon', 'action'];
   expandedElement: Player | null;
 
   // Data for the select
@@ -47,6 +47,9 @@ export class EventDetailComponent implements OnInit {
   // Form toggle
   showForm = true;
 
+  // Auth
+  isAuth = false;
+
   constructor(
     private route: ActivatedRoute,
     public router: Router,
@@ -54,6 +57,12 @@ export class EventDetailComponent implements OnInit {
     private serv: EventService) {  }
 
   ngOnInit() {
+  // auth check
+  this.isAuth = this.serv.isAuthenticated();
+  if (!this.isAuth) {
+    this.columnsToDisplay = this.columnsToDisplay.filter(res => res !== 'action');
+  }
+
   // Get event id from url
   this.route.params.subscribe(params => {
     this.id = params.id;
@@ -71,9 +80,7 @@ export class EventDetailComponent implements OnInit {
       this.event.playersList = new Array(this.playerData);
     }
 
-    // Update the event by sending the new object
-    this.serv.addPlayer(this.event, this.id, this.event.key);
-
+    this.updateEvent();
     // SnackBar
     this.snackBar.open('Nice, clash on', 'Got it!', {
       duration: 10000,
@@ -117,6 +124,22 @@ export class EventDetailComponent implements OnInit {
       icon: '',
       comment: ''
     };
+  }
+
+  // delete player from array
+  delPlayer(name): void {
+    this.dataSource = this.dataSource.filter(res => res.name !== name);
+    this.event.playersList = this.dataSource;
+    this.updateEvent();
+    this.snackBar.open('Player removed', 'Ok', {
+      duration: 10000,
+    });
+  }
+
+  // Update the event by sending the new object
+  updateEvent(): void {
+    console.log(this.event);
+    this.serv.addPlayer(this.event, this.id, this.event.key);
   }
 
 }
