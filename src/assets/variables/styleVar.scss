@@ -69,6 +69,8 @@ $lightOrange: #e67e22;
 .fullWidth{
   width: 100%;
   min-height: 50px;
+  display: block;
+  margin: 10px auto!important;
 }
 
 .cube{
@@ -91,4 +93,42 @@ $lightOrange: #e67e22;
 
 .btnToggle{
   margin: 30px auto;
+}
+
+/* Botton sheet */
+.deleteMsg{
+  font-size: 18px;
+    text-align: center;
+    font-family: Roboto;
+    width: 100%;
+    margin: 15px auto;
+    height: auto;
+    color: $darkBlue;
+}
+
+.dltBtn{
+  margin: 5px auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.dltItem{
+  width: 40%;
+  min-height: 50px;
+}
+
+.error{
+  background: $grey;
+  color: $dark;
+  width: 100vw;
+  height: 85vh;
+  overflow: hidden;
+  margin: 0;
+
+  span{
+    font-family: 'Bebas';
+    font-size: 45px;
+  }
 }

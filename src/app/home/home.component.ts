@@ -1,6 +1,8 @@
 import { Admin } from './../model/admin';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { EventService } from '../event.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -18,15 +20,25 @@ cred: Admin = {
   pass: 'canthackthis2020'
 };
 
-constructor(private snackBar: MatSnackBar) { }
+isAuth = false;
+
+constructor(private snackBar: MatSnackBar,
+            private router: Router,
+            private serv: EventService) { }
 
 ngOnInit() {
-  }
+  this.isAuth = this.serv.isAuthenticated();
+}
 
 connect(): void {
   if (this.admin.name === this.cred.name && this.admin.pass === this.cred.pass) {
     // you're in
     console.log('%c Hello admin', 'color:red');
+    this.serv.login();
+    this.snackBar.open('Welcome', 'Thanks', {
+      duration: 2000,
+    });
+    this.router.navigate(['/events']);
   } else {
     // GTFO
     this.snackBar.open('Wrong login/password', 'Retry', {
@@ -35,7 +47,7 @@ connect(): void {
   }
 }
 
-isFormValid(): boolean{
+isFormValid(): boolean {
   return (this.admin.name !== '' && this.admin.pass !== '');
 }
 

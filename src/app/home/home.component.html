@@ -1,4 +1,4 @@
-<div class="wrapper">
+<div class="wrapper" *ngIf="!isAuth">
   <div id="box">
     <img src="../../assets/pics/lock.png" alt="lock" />
     <h3>Please sign in</h3>
@@ -20,4 +20,9 @@
       <p>This space is for <span>Leader and Co-leaders</span></p>
     </div>
   </div>
+</div>
+<div *ngIf="isAuth" class="error verticalCenter">
+  <span class="">
+    You are already connected Admin !!!
+  </span>
 </div>

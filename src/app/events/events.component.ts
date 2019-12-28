@@ -1,6 +1,8 @@
 import { Event } from './../model/event';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { EventService } from '../event.service';
+import { MatBottomSheet, MatBottomSheetRef } from '@angular/material/bottom-sheet';
+import { MAT_BOTTOM_SHEET_DATA, MatSnackBar } from '@angular/material';
 
 
 @Component({
@@ -14,9 +16,13 @@ export class EventsComponent implements OnInit {
   eventList: Event[];
   showEv = true;
 
-  constructor(private serv: EventService) { }
+  isAuth = false;
+
+  constructor(private serv: EventService,
+              private bottomSheet: MatBottomSheet) { }
 
   ngOnInit() {
+    this.isAuth = this.serv.isAuthenticated();
     this.loadEvents();
   }
 
@@ -47,4 +53,32 @@ export class EventsComponent implements OnInit {
     return data;
   }
 
+  delete(key: string): void {
+    this.bottomSheet.open(DeleteConfirmationComponent, {data: key});
+  }
+
+}
+
+@Component({
+  selector: 'app-delete-confirmation',
+  templateUrl: 'delete.html',
+})
+export class DeleteConfirmationComponent {
+  constructor(private serv: EventService,
+              private bottomSheetRef: MatBottomSheetRef<DeleteConfirmationComponent>,
+              private snackBar: MatSnackBar,
+              @Inject(MAT_BOTTOM_SHEET_DATA) public key: any) {}
+
+  openLink(event: MouseEvent): void {
+    this.cancel(event);
+    this.serv.deleteEvent(this.key);
+    this.snackBar.open('Event deleted', 'Ok', {
+      duration: 2000,
+    });
+  }
+
+  cancel(event: MouseEvent): void {
+    this.bottomSheetRef.dismiss();
+    event.preventDefault();
+  }
 }

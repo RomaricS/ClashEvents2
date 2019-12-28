@@ -8,7 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 // Components
 import { AppComponent } from './app.component';
-import { EventsComponent } from './events/events.component';
+import { EventsComponent, DeleteConfirmationComponent } from './events/events.component';
 import { HomeComponent } from './home/home.component';
 import { EventDetailComponent } from './event-detail/event-detail.component';
 import { EventComponent } from './event/event.component';
@@ -26,6 +26,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 
 // DB
 import { environment } from '../environments/environment';
@@ -44,8 +45,10 @@ import { EventService } from './event.service';
       EventsComponent,
       HomeComponent,
       EventDetailComponent,
+      DeleteConfirmationComponent,
       EventComponent
    ],
+   entryComponents: [DeleteConfirmationComponent],
    imports: [
       BrowserModule,
       BrowserAnimationsModule,
@@ -63,6 +66,7 @@ import { EventService } from './event.service';
       MatDatepickerModule,
       MatCheckboxModule,
       MatNativeDateModule,
+      MatBottomSheetModule,
       AngularFireModule.initializeApp(environment.firebase),
       AngularFireDatabaseModule, // imports firebase/firestore, only needed for database features
       AngularFireAuthModule

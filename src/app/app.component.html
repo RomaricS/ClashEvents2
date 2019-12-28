@@ -11,10 +11,12 @@
   </label>
   <div id="sidebarMenu">
     <ul class="sidebarMenuInner">
-      <li>Romaric <span>Web Developer</span></li>
+      <li *ngIf="isAuth" >Admin <span>Leader</span></li>
+      <li *ngIf="!isAuth" >Anonymous <span>Member</span></li>
       <li><a routerLink="/admin" routerLinkActive="active">Leaders</a></li>
       <li><a routerLink="/events" routerLinkActive="active">View Events</a></li>
       <li><a routerLink="/addEvent" routerLinkActive="active">Add Event</a></li>
+      <li *ngIf="isAuth" (click)='logOut()' class="darkredBG">Log Out</li>
     </ul>
   </div>
 

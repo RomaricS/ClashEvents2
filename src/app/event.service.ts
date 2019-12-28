@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList  } from '@angular/fire/database';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable()
 export class EventService {
@@ -10,7 +11,8 @@ export class EventService {
   items: Observable<any[]>;
   pathEvent = '/events';
 
-  constructor(private db: AngularFireDatabase) { }
+  constructor(private db: AngularFireDatabase,
+              private snackBar: MatSnackBar) { }
 
   // Get All Events
   getEvents(): Observable<Event[]> {
@@ -38,10 +40,40 @@ export class EventService {
     obj.update(key, event);
   }
 
-    // Add a new event
-    addEvent(event: Event) {
-      const obj = this.db.list('/events');
-      obj.push(event);
-    }
+  // Add a new event
+  addEvent(event: Event) {
+    const obj = this.db.list('/events');
+    obj.push(event);
+  }
+
+  // Delete Event
+  deleteEvent(key): void {
+    const obj = this.db.list('/events');
+    obj.remove(key);
+  }
+
+  login(): void {
+    // tslint:disable-next-line: max-line-length
+    localStorage.setItem('token', `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE1MzMyNzM5NjksImV4cCI6MTU2NDgxMDAwNSwiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoiVGVzdCBHdWFyZCIsIkdpdmVuTmFtZSI6IkpvaG5ueSIsIlN1cm5hbWUiOiJSb2NrZXQiLCJFbWFpbCI6Impyb2NrZXRAZXhhbXBsZS5jb20iLCJyb2xlIjoiQWRtaW4ifQ.rEkg53_IeCLzGHlmaHTEO8KF5BNfl6NEJ8w-VEq2PkE`);
+  }
+
+  isTokenExpired(): boolean {
+    return false;
+  }
+
+  isAuthenticated(): boolean {
+    return localStorage.getItem('token') != null && !this.isTokenExpired();
+  }
+
+  clear(): void {
+    localStorage.clear();
+  }
+
+  logout(): void {
+    this.clear();
+    this.snackBar.open('You are disconnected', 'Bye', {
+      duration: 10000,
+    });
+  }
 
 }

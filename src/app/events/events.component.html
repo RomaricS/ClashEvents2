@@ -20,13 +20,14 @@
       </mat-card-content>
       <mat-card-actions>
       <button mat-raised-button class="fullWidth darkBG" color="primary" routerLink="/event/{{event.id}}">I'm In</button>
+      <button mat-raised-button *ngIf="isAuth" (click)="delete(event.key)" class="fullWidth darkredBG" color="primary">Delete this event</button>
       </mat-card-actions>
     </mat-card>
   </div>
 </div>
 
 <div *ngIf="!showEv" class="error verticalCenter">
-  <span class="">
+  <span>
     No Event right now
   </span>
 </div>
