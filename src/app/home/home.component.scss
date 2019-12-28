@@ -1,10 +1,115 @@
-.choiceList{
-  padding: 30px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
+@import "../../assets/variables/styleVar.scss";
+
+#wrapper{
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
 }
-.item {
-  width: 300px;
+
+#box{
+  width: 320px;
+  height: auto;
+  margin: 0 auto;
+  background: #fff;
+  border: thin solid $darkgrey;
+}
+
+#box > img{
+  width: 40px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  padding: 30px 0 20px 0;
+}
+
+#box > h3 {
+  text-transform: uppercase;
+  text-align: center;
+  font-size: .9em;
+  color: $dark;
+  margin: 0 0 35px 0;
+}
+
+#box > form{
+  width: 100%;
+  height: auo;
+  margin: 0 auto;
+  text-align: center;
+}
+
+#box > form > input{
+  display: inline-block;
+  width: 260px;
+  height: 50px;
+  margin: 5px auto;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: .8em;
+  border: 1.5px solid #cccccc;
+  transition: all .2s ease;
+}
+
+#box > form > input:focus{
+  border: thin solid $orange;
+  outline: none;
+}
+
+::-webkit-input-placeholder{
+  color: $dark;
+  font-weight: 700;
+  font-size: .9em;
+}
+
+/* #box > span {
+  display: block;
+  margin: 0;
+  padding: 5px 0 15px 0;
+  width: 260px;
+  height: 20px;
+  margin: 0 auto;
+  text-align: right;
+  text-transform: uppercase;
+  font-size: .7em;
+  color: $dark;
+  font-weight: 400;
+} */
+
+#box > .signup{
+  width: 100%;
+  height: auto;
+  border: none;
+  background: #f5f5f5;
+  outline: none;
+  margin: 0 auto;
+  padding: 20px;
+  display: block;
+  color: $dark;
+  text-transform: uppercase;
+  text-align: center;
+  box-sizing: border-box;
+  font-size: .8em;
+}
+
+#box > .signup p,span{
+  font-size: 12px;
+  text-decoration: none;
+}
+
+#box > .signup p{
+  color: $darkgrey;
+}
+
+#box > .signup span{
+  text-decoration: none;
+  color: $orange;
+
+}
+
+.btnLog{
+  width: 81%;
+  display: block;
+  min-height: 50px;
+  border-radius: 0;
+  margin: 10px auto;
+  padding: 0;
 }
