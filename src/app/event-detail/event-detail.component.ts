@@ -27,6 +27,8 @@ export class EventDetailComponent implements OnInit {
   columnsToDisplay = ['name', 'level', 'icon', 'action'];
   expandedElement: Player | null;
 
+  artUrl = this.serv.artwork$;
+
   // Data for the select
   thList: any[];
 
@@ -97,6 +99,9 @@ export class EventDetailComponent implements OnInit {
   loadEventData(id): void {
     this.serv.getEventbyId(id).subscribe(res => {
       this.event = res[0];
+      if (this.event.picture && this.event.picture !== '') {
+        this.serv.artwork$.next(this.event.picture);
+      }
       // Sort the playerList Table : desc
       if (this.event.playersList) {
         this.dataSource = this.event.playersList.sort((a, b) => {
@@ -110,6 +115,7 @@ export class EventDetailComponent implements OnInit {
           }
           return 0;
         });
+        console.log(this.dataSource);
       }
       this.thList = this.event.townhall.filter(th => th.state);
     },

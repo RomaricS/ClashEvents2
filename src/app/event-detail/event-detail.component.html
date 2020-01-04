@@ -1,9 +1,14 @@
 <div *ngIf="event">
   <div class="formulaire" *ngIf="showForm && event.active" >
-    <h2 class="centerText">Sign up for {{ event.title }}</h2>
-    <div>
-      The list will be closed  : <span class="orange">{{ event.startsAt }}</span>
+    <div class="dltBtn">
+      <h2 class="centerText mobCenter">Sign up for <span class="darkred">{{ event.title }}</span></h2>
+      <div *ngIf="event.picture" class="artParent">
+        <img class="artwork" [src]="event.picture" alt="artWork">
+      </div>
     </div>
+    <div>
+        The list will be closed  : <span class="orange">{{ event.startsAt }}</span>
+      </div>
     <form class="inputs">
       <mat-form-field>
         <input matInput placeholder="Player name *" [(ngModel)]="playerData.name" name="name"/>
@@ -42,54 +47,62 @@
   </div>
 
   <!-- Table -->
-  <div class="listSigned">
+  <div class="listSigned" style="overflow-x:auto;">
     <h2 class="centerText" *ngIf="event.active && dataSource" >The list so Far</h2>
     <h2 class="centerText" *ngIf="!event.active">The final list</h2>
     <h2 class="centerText" *ngIf="event.active && !dataSource">Nobody yet!!!</h2>
-    <table
-      mat-table
-      [dataSource]="dataSource"
-      multiTemplateDataRows
-      class="mat-elevation-z8">
-      <ng-container
-        matColumnDef="{{ column }}"
-        *ngFor="let column of columnsToDisplay">
-        <th mat-header-cell *matHeaderCellDef>{{ column }}</th>
-        <td mat-cell *matCellDef="let element">
-          <div *ngIf="column !== 'icon' && column !== 'action'">{{ element[column] }}</div>
-          <div *ngIf="column === 'icon'"><img src="{{ element[column] }}" alt="icon" class="cube"></div>
-          <div *ngIf="column === 'action' && isAuth"><img src="../../assets/pics/trash.png" alt="delete" class="w20" (click)="delPlayer(element.name)"></div>
-        </td>
-      </ng-container>
-
-      <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
-      <ng-container matColumnDef="expandedDetail">
-        <td
-          mat-cell
-          *matCellDef="let element"
-          [attr.colspan]="columnsToDisplay.length" class="comment">
-          <div
-            class="example-element-detail"
-            [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-            <div class="example-element-description">
-             Comment : {{ element.comment }}
-            </div>
-          </div>
-        </td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-      <tr
-        mat-row
-        *matRowDef="let element; columns: columnsToDisplay"
-        class="example-element-row"
-        [class.example-expanded-row]="expandedElement === element"
-        (click)="expandedElement = expandedElement === element ? null : element">
+    <table>
+      <tr>
+        <th class="frozen">
+          Name
+        </th>
+        <th>
+          Level
+        </th>
+        <th>
+          Icon
+        </th>
+        <th>
+          Comment
+        </th>
+        <th *ngIf="isAuth">
+          Action
+        </th>
+        <th *ngIf="isAuth">
+          UKAA
+        </th>
+        <th *ngIf="isAuth">
+          FE
+        </th>
+        <th *ngIf="isAuth">
+          GOW
+        </th>
       </tr>
-      <tr
-        mat-row
-        *matRowDef="let row; columns: ['expandedDetail']"
-        class="example-detail-row">
+      <tr *ngFor="let player of dataSource">
+        <td class="frozen">
+          {{player.name}}
+        </td>
+        <td>
+          {{player.level}}
+        </td>
+        <td>
+          <img [src]="player.icon" alt="icon" class="cube">
+        </td>
+        <td>
+          {{player.comment}}
+        </td>
+        <td *ngIf="isAuth">
+          <img src="../../assets/pics/trash.png" alt="delete" class="w20" (click)="delPlayer(player.name)">
+        </td>
+        <td *ngIf="isAuth">
+          <mat-checkbox name="clan"></mat-checkbox>
+        </td>
+        <td *ngIf="isAuth">
+          <mat-checkbox name="clan"></mat-checkbox>
+        </td>
+        <td *ngIf="isAuth">
+          <mat-checkbox name="clan"></mat-checkbox>
+        </td>
       </tr>
     </table>
   </div>

@@ -1,7 +1,7 @@
 import { Event } from './model/event';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList  } from '@angular/fire/database';
-import { Observable, of } from 'rxjs';
+import { Observable, of, BehaviorSubject } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -11,8 +11,15 @@ export class EventService {
   items: Observable<any[]>;
   pathEvent = '/events';
 
+  // navbar
+  title$: BehaviorSubject<string>;
+  artwork$: BehaviorSubject<string>;
+
   constructor(private db: AngularFireDatabase,
-              private snackBar: MatSnackBar) { }
+              private snackBar: MatSnackBar) {
+                this.title$ = new BehaviorSubject('UKAA C.O.C Events');
+                this.artwork$ = new BehaviorSubject(null);
+              }
 
   // Get All Events
   getEvents(): Observable<Event[]> {

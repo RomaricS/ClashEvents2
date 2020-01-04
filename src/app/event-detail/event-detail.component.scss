@@ -3,50 +3,40 @@
 
 .listSigned{
   padding: 10px;
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    overflow-x:auto;
+    width: 100%;
+    border: 1px solid #ddd;
+    box-shadow: 0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12);
+  }
 
   th{
-    font-weight: bold;
     text-transform: uppercase;
     background: $orange;
   }
-  table {
-    width: 100%;
-    cursor: pointer;
-    text-transform: uppercase;
+
+  th, td {
+    text-align: left;
+    padding: 8px;
   }
 
-  tr.example-detail-row {
-    height: 0;
-  }
-
-  tr.example-element-row:not(.example-expanded-row):hover {
-    background: #777;
-  }
-
-  tr.example-element-row:not(.example-expanded-row):active {
-    background: #efefef;
-  }
-
-  .example-element-row td {
-    border-bottom-width: 0;
-  }
-
-  .example-element-detail {
-    overflow: hidden;
-    display: flex;
-  }
-
-  .comment{
-    background: $blueHole;
-    color: $grey;
-  }
-  .example-element-description {
-    padding: 16px;
-    text-transform: capitalize;
-  }
-
-  .example-element-description-attribution {
-    opacity: 0.5;
+  tr:nth-child(even){
+    background-color: #f2f2f2;
   }
 }
+
+.artwork {
+  width: 100px;
+  height: 100px;
+}
+@media (max-width:767px)  { /* smartphones, portrait iPhone, portrait 480x320 phones (Android) Iphone 5 de merde */
+  .artParent {
+    margin: auto;
+  }
+  .mobCenter {
+    width: 100%;
+  }
+ }
 

@@ -1,6 +1,6 @@
 <header id="header">
   <div class="banner">
-    UKAA Clash of Clans Events
+    {{bannerTitle | async}}
   </div>
 </header>
 <input type="checkbox" class="openSidebarMenu" id="openSidebarMenu">
@@ -15,7 +15,7 @@
       <li *ngIf="!isAuth" >Anonymous <span>Member</span></li>
       <li><a routerLink="/admin" routerLinkActive="active">Leaders Login</a></li>
       <li><a routerLink="/events" routerLinkActive="active">View Events</a></li>
-      <li><a routerLink="/addEvent" routerLinkActive="active">Add Event</a></li>
+      <li *ngIf="isAuth"><a routerLink="/addEvent" routerLinkActive="active">Add Event</a></li>
       <li *ngIf="isAuth" (click)='logOut()' class="darkredBG">Log Out</li>
     </ul>
   </div>

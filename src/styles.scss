@@ -13,3 +13,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-checkbox-checked.mat-accent .mat-checkbox-background{
   background-color: $darkred!important;
 }
+.mat-checkbox-inner-container{
+  height: 25px!important;
+  width: 25px!important;
+}

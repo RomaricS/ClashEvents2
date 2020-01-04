@@ -11,6 +11,8 @@ export class AppComponent implements OnInit {
   title = 'clashEvents';
   showOverlay = false;
 
+  bannerTitle = this.serv.title$;
+
   mySubscription: any;
 
   isAuth = false;
