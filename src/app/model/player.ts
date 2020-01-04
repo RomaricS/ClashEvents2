@@ -3,4 +3,7 @@ export class Player {
   level: string;
   icon: string;
   comment: string;
+  ukaa: boolean;
+  fe: boolean;
+  gow: boolean;
 }

@@ -40,7 +40,10 @@ export class EventDetailComponent implements OnInit {
     name: '',
     level: '',
     icon: '',
-    comment: ''
+    comment: '',
+    ukaa: false,
+    fe: false,
+    gow: false
   };
 
   // Event Id
@@ -103,10 +106,41 @@ export class EventDetailComponent implements OnInit {
         this.serv.artwork$.next(this.event.picture);
       }
       // Sort the playerList Table : desc
-      if (this.event.playersList) {
+      if (this.event.playersList.length > 0) {
         this.dataSource = this.event.playersList.sort((a, b) => {
-          const c = a.level;
-          const d = b.level;
+          // Sort all GOW players
+          const i = a.gow;
+          const j = b.gow;
+          if (i > j) {
+            return 1;
+          }
+          if (i < j) {
+            return -1;
+          }
+
+          // Sort FE players
+          const g = a.fe;
+          const h = b.fe;
+          if (g > h) {
+            return 1;
+          }
+          if (g < h) {
+            return -1;
+          }
+
+          // Sort UKAA players
+          const e = a.ukaa;
+          const f = b.ukaa;
+          if (e > f) {
+            return 1;
+          }
+          if (e < f) {
+            return -1;
+          }
+
+          // Sort players based on level
+          const c = parseInt(a.level.slice(2), 10);
+          const d = parseInt(b.level.slice(2), 10);
           if (c > d) {
             return -1;
           }
@@ -115,7 +149,6 @@ export class EventDetailComponent implements OnInit {
           }
           return 0;
         });
-        console.log(this.dataSource);
       }
       this.thList = this.event.townhall.filter(th => th.state);
     },
@@ -128,7 +161,10 @@ export class EventDetailComponent implements OnInit {
       name: '',
       level: '',
       icon: '',
-      comment: ''
+      comment: '',
+      ukaa: false,
+      fe: false,
+      gow: false
     };
   }
 
@@ -144,8 +180,29 @@ export class EventDetailComponent implements OnInit {
 
   // Update the event by sending the new object
   updateEvent(): void {
-    console.log(this.event);
     this.serv.addPlayer(this.event, this.id, this.event.key);
+  }
+
+  // Save roster
+  saveRoster(): void {
+    this.event.playersList = this.dataSource;
+    this.updateEvent();
+    this.snackBar.open('Roster saved', 'Ok', {
+      duration: 10000,
+    });
+  }
+
+  // Get total for every clan
+  getUKAATotal(): number {
+    return this.dataSource.filter(res => res.ukaa).length;
+  }
+
+  getFETotal(): number {
+    return this.dataSource.filter(res => res.fe).length;
+  }
+
+  getGOWTotal(): number {
+    return this.dataSource.filter(res => res.gow).length;
   }
 
 }

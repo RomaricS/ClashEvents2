@@ -52,7 +52,7 @@
     <h2 class="centerText" *ngIf="!event.active">The final list</h2>
     <h2 class="centerText" *ngIf="event.active && !dataSource">Nobody yet!!!</h2>
     <table>
-      <tr>
+      <tr class="grey">
         <th class="frozen">
           Name
         </th>
@@ -83,7 +83,7 @@
           {{player.name}}
         </td>
         <td>
-          {{player.level}}
+          {{player.level | uppercase}}
         </td>
         <td>
           <img [src]="player.icon" alt="icon" class="cube">
@@ -95,15 +95,35 @@
           <img src="../../assets/pics/trash.png" alt="delete" class="w20" (click)="delPlayer(player.name)">
         </td>
         <td *ngIf="isAuth">
-          <mat-checkbox name="clan"></mat-checkbox>
+          <div class="centerText">
+            <mat-checkbox [(ngModel)]="player.ukaa" name="clan"></mat-checkbox>
+          </div>
         </td>
         <td *ngIf="isAuth">
-          <mat-checkbox name="clan"></mat-checkbox>
+          <mat-checkbox [(ngModel)]="player.fe" name="clan"></mat-checkbox>
         </td>
         <td *ngIf="isAuth">
-          <mat-checkbox name="clan"></mat-checkbox>
+          <mat-checkbox [(ngModel)]="player.gow" name="clan"></mat-checkbox>
         </td>
+      </tr>
+      <tr class="orangeBG grey" *ngIf="isAuth">
+        <th colspan="5"><div class="upperC centerText">Total</div></th>
+        <th>{{getUKAATotal()}}</th>
+        <th>{{getFETotal()}}</th>
+        <th>{{getGOWTotal()}}</th>
       </tr>
     </table>
   </div>
+  <div class="pad10">
+    <div *ngIf="isAuth" class="btnToggle">
+      <button
+      mat-raised-button
+      class="fullWidth darkredBG"
+      color="primary"
+      (click)="saveRoster()">
+      Save Roster
+    </button>
+    </div>
+  </div>
 </div>
+

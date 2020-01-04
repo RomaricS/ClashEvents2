@@ -19,8 +19,8 @@ $lightOrange: #e67e22;
 .darkred{
   color: $darkred;
 }
-.darkred{
-  color: $darkred;
+.grey{
+  color: $grey;
 }
 .orange{
   color: $orange;
@@ -52,6 +52,9 @@ $lightOrange: #e67e22;
 /* Misc */
  .upperC{
    text-transform: uppercase;
+ }
+ .pad10{
+   padding: 10px;
  }
  .bold{
    font-weight: 700;
