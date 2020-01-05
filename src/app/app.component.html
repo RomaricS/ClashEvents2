@@ -11,12 +11,23 @@
   </label>
   <div id="sidebarMenu">
     <ul class="sidebarMenuInner">
-      <li *ngIf="isAuth" >Admin <span>Leader</span></li>
-      <li *ngIf="!isAuth" >Anonymous <span>Member</span></li>
-      <li><a routerLink="/admin" routerLinkActive="active">Leaders Login</a></li>
-      <li><a routerLink="/events" routerLinkActive="active">View Events</a></li>
-      <li *ngIf="isAuth"><a routerLink="/addEvent" routerLinkActive="active">Add Event</a></li>
-      <li *ngIf="isAuth" (click)='logOut()' class="darkredBG">Log Out</li>
+    <li *ngIf="isAuth">Admin <span>Leader</span></li>
+      <li *ngIf="!isAuth">Anonymous <span>Member</span></li>
+      <li [class.selected]="(navBar | async) === 'home'">
+        <a routerLink="/admin" routerLinkActive="active">Leaders Login</a>
+        <div *ngIf="(navBar | async) === 'home'"  class="arrow">&#8250;</div>
+      </li>
+      <li [class.selected]="(navBar | async) == 'events'">
+      <a routerLink="/events" routerLinkActive="active">View Events</a>
+        <div *ngIf="(navBar | async) == 'events'" class="arrow">&#8250;</div>
+      </li>
+    <li *ngIf="isAuth" [class.selected]="(navBar | async) === 'add'">
+      <a routerLink="/addEvent" routerLinkActive="active">Add Event</a>
+      <div *ngIf="(navBar | async) === 'add'"  class="arrow">&#8250;</div>
+    </li>
+    <li *ngIf="isAuth" (click)='logOut()' class="lightred">
+      Log Out
+    </li>
     </ul>
   </div>
 

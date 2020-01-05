@@ -1,5 +1,6 @@
 /* Colors */
-$dark: #34495e;
+$dark: #000;
+// $dark: #34495e;
 $grey: #ecf0f1;
 $darkgrey: #bdc3c7;
 $darkBlue: #2c3e50;
@@ -36,6 +37,9 @@ $lightOrange: #e67e22;
 }
 .darkredBG{
   background: $darkred;
+}
+.blueBG {
+  background: $blue;
 }
 
 @media (max-width:321px)  { /* smartphones, portrait iPhone, portrait 480x320 phones (Android) Iphone 5 de merde */

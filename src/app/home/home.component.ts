@@ -24,7 +24,9 @@ isAuth = false;
 
 constructor(private snackBar: MatSnackBar,
             private router: Router,
-            private serv: EventService) { }
+            private serv: EventService) {
+              this.serv.navBar$.next('home');
+             }
 
 ngOnInit() {
   this.isAuth = this.serv.isAuthenticated();
@@ -33,7 +35,6 @@ ngOnInit() {
 connect(): void {
   if (this.admin.name === this.cred.name && this.admin.pass === this.cred.pass) {
     // you're in
-    console.log('%c Hello admin', 'color:red');
     this.serv.login();
     this.snackBar.open('Welcome', 'Thanks', {
       duration: 2000,

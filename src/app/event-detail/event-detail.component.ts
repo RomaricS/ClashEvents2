@@ -35,6 +35,19 @@ export class EventDetailComponent implements OnInit {
   // Event detail
   event: Event;
 
+  // Table to export
+  ukaaTable: Player[];
+  feTable: Player[];
+  gowTable: Player[];
+
+  // Clans Name
+  ukaaName = 'UKAA';
+  feName = 'Full English';
+  gowName = 'God Of war';
+
+  // Roster hide/show
+  showRosters = false;
+
   // Player form data
   playerData: Player = {
     name: '',
@@ -99,12 +112,13 @@ export class EventDetailComponent implements OnInit {
     return (this.playerData.name !== '' && this.playerData.level !== '');
   }
 
-  loadEventData(id): void {
+  loadEventData(id: string): void {
     this.serv.getEventbyId(id).subscribe(res => {
       this.event = res[0];
       if (this.event.picture && this.event.picture !== '') {
         this.serv.artwork$.next(this.event.picture);
       }
+      if (this.event.playersList) {
       // Sort the playerList Table : desc
       if (this.event.playersList.length > 0) {
         this.dataSource = this.event.playersList.sort((a, b) => {
@@ -150,6 +164,8 @@ export class EventDetailComponent implements OnInit {
           return 0;
         });
       }
+      }
+
       this.thList = this.event.townhall.filter(th => th.state);
     },
     err => console.log(err));
@@ -192,17 +208,55 @@ export class EventDetailComponent implements OnInit {
     });
   }
 
+  handleCheck(player: Player, clan: number): void {
+    if (clan === 1) {
+      if (player.ukaa) {
+        player.fe = false;
+        player.gow = false;
+      }
+    } else if (clan === 2) {
+      if (player.fe) {
+        player.ukaa = false;
+        player.gow = false;
+      }
+    } else if (clan === 3) {
+      if (player.gow) {
+        player.ukaa = false;
+        player.fe = false;
+      }
+    }
+  }
+
   // Get total for every clan
   getUKAATotal(): number {
+    if (this.dataSource) {
     return this.dataSource.filter(res => res.ukaa).length;
+        }
+    return 0;
   }
 
   getFETotal(): number {
-    return this.dataSource.filter(res => res.fe).length;
+    if (this.dataSource) {
+      return this.dataSource.filter(res => res.fe).length;
+    }
+    return 0;
   }
 
   getGOWTotal(): number {
+    if (this.dataSource) {
     return this.dataSource.filter(res => res.gow).length;
+        }
+    return 0;
+  }
+
+  showRoster() {
+    this.saveRoster();
+    if (this.dataSource && this.dataSource.length > 0) {
+      this.ukaaTable = this.dataSource.filter(player => player.ukaa);
+      this.feTable = this.dataSource.filter(player => player.fe);
+      this.gowTable = this.dataSource.filter(player => player.gow);
+      this.showRosters = true;
+    }
   }
 
 }

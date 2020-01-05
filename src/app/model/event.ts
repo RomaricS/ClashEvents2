@@ -9,4 +9,5 @@ export class Event {
   active: boolean;
   townhall: Hall[];
   playersList: Player[];
+  clanSelection: boolean;
 }

@@ -8,8 +8,7 @@ import { MAT_BOTTOM_SHEET_DATA, MatSnackBar } from '@angular/material';
 @Component({
   selector: 'app-events',
   templateUrl: './events.component.html',
-  styleUrls: ['./events.component.scss'],
-  providers: [EventService]
+  styleUrls: ['./events.component.scss']
 })
 export class EventsComponent implements OnInit {
 
@@ -19,7 +18,9 @@ export class EventsComponent implements OnInit {
   isAuth = false;
 
   constructor(private serv: EventService,
-              private bottomSheet: MatBottomSheet) { }
+              private bottomSheet: MatBottomSheet) {
+                this.serv.navBar$.next('events');
+              }
 
   ngOnInit() {
     this.isAuth = this.serv.isAuthenticated();
@@ -30,7 +31,6 @@ export class EventsComponent implements OnInit {
     this.serv.getEvents().subscribe(res => {
       if (res && res.length > 0) {
         this.eventList = res.map(this.castData, this).filter(ev => ev.active);
-        console.log(this.eventList);
       } else {
         this.showEv = false;
         console.log('NO DATA');
@@ -44,6 +44,7 @@ export class EventsComponent implements OnInit {
         key: d.key,
         title: d.title,
         id: d.id,
+        clanSelection: d.clanSelection || false,
         picture: d.picture || 'https://i.ytimg.com/vi/r2BFeSUkNCI/maxresdefault.jpg',
         startsAt: d.startsAt,
         active: d.active,
@@ -67,7 +68,9 @@ export class DeleteConfirmationComponent {
   constructor(private serv: EventService,
               private bottomSheetRef: MatBottomSheetRef<DeleteConfirmationComponent>,
               private snackBar: MatSnackBar,
-              @Inject(MAT_BOTTOM_SHEET_DATA) public key: any) {}
+              @Inject(MAT_BOTTOM_SHEET_DATA) public key: any) {
+                this.serv.navBar$.next('events');
+              }
 
   openLink(event: MouseEvent): void {
     this.cancel(event);

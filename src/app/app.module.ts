@@ -25,8 +25,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 // DB
 import { environment } from '../environments/environment';
@@ -36,6 +37,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 
 // Services
 import { EventService } from './event.service';
+import { ClanListComponent } from './clan-list/clan-list.component';
 
 
 
@@ -46,7 +48,8 @@ import { EventService } from './event.service';
       HomeComponent,
       EventDetailComponent,
       DeleteConfirmationComponent,
-      EventComponent
+      EventComponent,
+      ClanListComponent
    ],
    entryComponents: [DeleteConfirmationComponent],
    imports: [
@@ -67,11 +70,14 @@ import { EventService } from './event.service';
       MatCheckboxModule,
       MatNativeDateModule,
       MatBottomSheetModule,
+      MatSlideToggleModule,
       AngularFireModule.initializeApp(environment.firebase),
       AngularFireDatabaseModule, // imports firebase/firestore, only needed for database features
       AngularFireAuthModule
     ],
-   providers: [EventService],
+   providers: [
+    {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
+     EventService],
    bootstrap: [
       AppComponent
    ]

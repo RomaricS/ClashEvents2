@@ -20,6 +20,8 @@
         <mat-datepicker touchUi #picker></mat-datepicker>
       </mat-form-field>
 
+      <mat-slide-toggle [(ngModel)]="event.clanSelection" name="clanSelection" class="clanSelection">Show Clan selection</mat-slide-toggle>
+
       <div>Open to</div>
       <section class="lvlCheck">
         <mat-checkbox *ngFor="let th of event.townhall"  class="itemCheck" [(ngModel)]="th.state" name="townhall">{{th.level | uppercase}}</mat-checkbox>

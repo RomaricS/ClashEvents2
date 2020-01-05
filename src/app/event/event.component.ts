@@ -15,6 +15,7 @@ export class EventComponent implements OnInit {
     id: '',
     picture: '',
     startsAt: '',
+    clanSelection: false,
     active: true,
     townhall: [
       {
@@ -56,7 +57,9 @@ export class EventComponent implements OnInit {
   startDate = new Date();
 
   constructor(private snackBar: MatSnackBar,
-              private serv: EventService) { }
+              private serv: EventService) {
+                this.serv.navBar$.next('add');
+              }
 
   ngOnInit() {
   }
@@ -87,5 +90,4 @@ export class EventComponent implements OnInit {
     // Hide the form to prevent multiple unwanted entries
     this.toggleForm();
   }
-
 }

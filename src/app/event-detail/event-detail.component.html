@@ -36,21 +36,14 @@
       Validate
     </button>
   </div>
-  <div *ngIf="!showForm" class="btnToggle">
-    <button
-    mat-raised-button
-    class="fullWidth darkredBG"
-    color="primary"
-    (click)="toggleForm()">
-    Add another player
-  </button>
-  </div>
 
   <!-- Table -->
+  <h2 class="centerText">
+    <span class="centerText" *ngIf="event.active && dataSource" >The list so Far</span>
+    <span class="centerText" *ngIf="!event.active">The final list</span>
+    <span class="centerText" *ngIf="event.active && !dataSource">Nobody yet!!!</span>
+  </h2>
   <div class="listSigned" style="overflow-x:auto;">
-    <h2 class="centerText" *ngIf="event.active && dataSource" >The list so Far</h2>
-    <h2 class="centerText" *ngIf="!event.active">The final list</h2>
-    <h2 class="centerText" *ngIf="event.active && !dataSource">Nobody yet!!!</h2>
     <table>
       <tr class="grey">
         <th class="frozen">
@@ -68,13 +61,13 @@
         <th *ngIf="isAuth">
           Action
         </th>
-        <th *ngIf="isAuth">
+        <th *ngIf="isAuth && event.clanSelection">
           UKAA
         </th>
-        <th *ngIf="isAuth">
+        <th *ngIf="isAuth && event.clanSelection">
           FE
         </th>
-        <th *ngIf="isAuth">
+        <th *ngIf="isAuth && event.clanSelection">
           GOW
         </th>
       </tr>
@@ -94,19 +87,19 @@
         <td *ngIf="isAuth">
           <img src="../../assets/pics/trash.png" alt="delete" class="w20" (click)="delPlayer(player.name)">
         </td>
-        <td *ngIf="isAuth">
+        <td *ngIf="isAuth && event.clanSelection">
           <div class="centerText">
-            <mat-checkbox [(ngModel)]="player.ukaa" name="clan"></mat-checkbox>
+            <mat-checkbox [(ngModel)]="player.ukaa" [value]='true' (change)="handleCheck(player, 1)" name="clan"></mat-checkbox>
           </div>
         </td>
-        <td *ngIf="isAuth">
-          <mat-checkbox [(ngModel)]="player.fe" name="clan"></mat-checkbox>
+        <td *ngIf="isAuth && event.clanSelection">
+          <mat-checkbox [(ngModel)]="player.fe" [value]='true' (change)="handleCheck(player, 2)" name="clan"></mat-checkbox>
         </td>
-        <td *ngIf="isAuth">
-          <mat-checkbox [(ngModel)]="player.gow" name="clan"></mat-checkbox>
+        <td *ngIf="isAuth && event.clanSelection">
+          <mat-checkbox [(ngModel)]="player.gow" [value]='true' (change)="handleCheck(player, 3)" name="clan"></mat-checkbox>
         </td>
       </tr>
-      <tr class="orangeBG grey" *ngIf="isAuth">
+      <tr class="orangeBG grey" *ngIf="isAuth && event.clanSelection">
         <th colspan="5"><div class="upperC centerText">Total</div></th>
         <th>{{getUKAATotal()}}</th>
         <th>{{getFETotal()}}</th>
@@ -115,15 +108,39 @@
     </table>
   </div>
   <div class="pad10">
+    <button
+      mat-raised-button
+      *ngIf="!showForm"
+      class="fullWidth"
+      color="primary"
+      (click)="toggleForm()">
+      Add another player
+    </button>
+
     <div *ngIf="isAuth" class="btnToggle">
-      <button
+    <button
       mat-raised-button
       class="fullWidth darkredBG"
       color="primary"
       (click)="saveRoster()">
       Save Roster
     </button>
+
+    <button
+    *ngIf="event.clanSelection"
+        mat-raised-button
+        class="fullWidth blueBG"
+        color="primary"
+        (click)="showRoster()">
+        Show Clans list
+    </button>
     </div>
+  </div>
+
+  <div class="pad10" style="overflow-x:auto;" *ngIf="showRosters">
+    <app-clan-list [halls]='thList' [clanName]='ukaaName' [list]="ukaaTable"></app-clan-list>
+    <app-clan-list [halls]='thList' [clanName]='feName' [list]="feTable"></app-clan-list>
+    <app-clan-list [halls]='thList' [clanName]='gowName' [list]="gowTable"></app-clan-list>
   </div>
 </div>
 

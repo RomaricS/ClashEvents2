@@ -13,6 +13,8 @@ export class AppComponent implements OnInit {
 
   bannerTitle = this.serv.title$;
 
+  navBar = this.serv.navBar$;
+
   mySubscription: any;
 
   isAuth = false;

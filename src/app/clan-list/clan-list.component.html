@@ -1,0 +1,45 @@
+<div class="clanList" *ngIf="list.length > 0" >
+  <table>
+    <tr class="orangeBG grey">
+    <td colspan="4">{{ clanName }}</td>
+    </tr>
+    <tr class="grey">
+      <th class="frozen">
+        Name
+      </th>
+      <th>
+        Level
+      </th>
+      <th>
+        Icon
+      </th>
+      <th>
+        Comment
+      </th>
+    </tr>
+    <tr *ngFor="let player of list">
+      <td class="frozen">
+        {{player.name}}
+      </td>
+      <td>
+        {{player.level | uppercase}}
+      </td>
+      <td>
+        <img [src]="player.icon" alt="icon" class="cube">
+      </td>
+      <td>
+        {{player.comment}}
+      </td>
+    </tr>
+  </table>
+
+  <div class="total">
+    <div class="darkredBG">
+      Total : {{list.length}}
+    </div>
+    <div *ngFor="let lvl of stats" class="blueBG">
+        {{ lvl.level | uppercase }} : {{ getTotalByLevel(lvl.level) }}
+    </div>
+  </div>
+</div>
+
