@@ -1,0 +1,15 @@
+<div class="deleteMsg">Change the credentials</div>
+<form class="inputs edition">
+
+  <mat-form-field>
+    <input matInput placeholder="Username" [(ngModel)]="cred.login" name="title"/>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Password" [(ngModel)]="cred.pass" name="pass"/>
+  </mat-form-field>
+</form>
+<div class="dltBtn">
+  <button mat-stroked-button color="primary" class="dltItem" (click)="openLink(cred, $event)">Confirm</button>
+  <button mat-stroked-button color="accent" class="dltItem" (click)="cancel($event)">Cancel</button>
+</div>

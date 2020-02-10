@@ -35,6 +35,9 @@ export class EventDetailComponent implements OnInit {
   // Event detail
   event: Event;
 
+  // Duplicate Name
+  showDuplicate = false;
+
   // Table to export
   ukaaTable: Player[];
   feTable: Player[];
@@ -109,18 +112,37 @@ export class EventDetailComponent implements OnInit {
   }
 
   isFormValid(): boolean {
-    return (this.playerData.name !== '' && this.playerData.level !== '');
+    return (this.playerData.name !== '' && this.playerData.level !== '' && !this.checkName(this.playerData.name));
+  }
+
+  checkName(name): boolean {
+    if (this.dataSource){
+      if (this.dataSource.find(obj => {
+      return obj.name.toUpperCase() === name.toUpperCase();
+      })) {
+          this.showDuplicate = true;
+          return true;
+      }
+    }
+    this.showDuplicate = false;
+    return false;
   }
 
   loadEventData(id: string): void {
     this.serv.getEventbyId(id).subscribe(res => {
       this.event = res[0];
+      const a = new Date(this.redoDate(this.event.startsAt));
+      if (a < new Date()) {
+        this.event.active = false;
+      }
       if (this.event.picture && this.event.picture !== '') {
         this.serv.artwork$.next(this.event.picture);
       }
+
       if (this.event.playersList) {
       // Sort the playerList Table : desc
       if (this.event.playersList.length > 0) {
+        // tslint:disable-next-line: no-shadowed-variable
         this.dataSource = this.event.playersList.sort((a, b) => {
           // Sort all GOW players
           const i = a.gow;
@@ -182,6 +204,13 @@ export class EventDetailComponent implements OnInit {
       fe: false,
       gow: false
     };
+  }
+
+  redoDate(d): string {
+    const day = d.substring(0, 2);
+    const month = d.substring(3, 5);
+    const year = d.substring(6);
+    return month + '/' + day + '/' + year;
   }
 
   // delete player from array
@@ -247,6 +276,17 @@ export class EventDetailComponent implements OnInit {
     return this.dataSource.filter(res => res.gow).length;
         }
     return 0;
+  }
+
+  exportRoster(data) {
+    const a = data.map(res => {
+      return {
+        name: res.name.toUpperCase(),
+        level: res.level.toUpperCase(),
+        comment: res.comment.toUpperCase()
+      };
+    });
+    this.serv.exportAsExcelFile(a, 'Full_Roster_Table');
   }
 
   showRoster() {

@@ -20,6 +20,12 @@
         <mat-datepicker touchUi #picker></mat-datepicker>
       </mat-form-field>
 
+      <mat-form-field>
+        <input matInput [min]="event.startsAt" [matDatepicker]="picker2" placeholder="Spin date *" [(ngModel)]="event.spinDate" name="spinDate">
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker touchUi #picker2></mat-datepicker>
+      </mat-form-field>
+
       <mat-slide-toggle [(ngModel)]="event.clanSelection" name="clanSelection" class="clanSelection">Show Clan selection</mat-slide-toggle>
 
       <div>Open to</div>

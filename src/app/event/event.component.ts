@@ -15,6 +15,7 @@ export class EventComponent implements OnInit {
     id: '',
     picture: '',
     startsAt: '',
+    spinDate: '',
     clanSelection: false,
     active: true,
     townhall: [
@@ -69,15 +70,15 @@ export class EventComponent implements OnInit {
   }
 
   isFormValid(): boolean {
-    return (this.event.title !== '' && this.event.id !== '' && this.event.startsAt !== '') ;
+    return (this.event.title !== '' && this.event.id !== '' && this.event.startsAt !== '' && this.event.spinDate !== '') ;
   }
 
   openSnackBar() {
     if (this.event.picture === '') {
       this.event.picture = 'https://pbs.twimg.com/profile_images/1142194267319873541/imd-tTed_400x400.jpg';
     }
-    this.event.startsAt = new Date(this.event.startsAt).toLocaleDateString();
-    console.log(this.event);
+    this.event.startsAt = new Date(this.event.startsAt).toLocaleDateString('en-GB');
+    this.event.spinDate = new Date(this.event.spinDate).toLocaleDateString('en-GB');
 
     // Send data to db
     this.serv.addEvent(this.event);

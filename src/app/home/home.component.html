@@ -24,5 +24,14 @@
 <div *ngIf="isAuth" class="error verticalCenter">
   <span class="">
     You are already connected Admin !!!
+
+    <button
+    mat-raised-button
+    *ngIf="isAdmin()"
+    class="btnLog blueBG"
+    color="primary"
+    (click)="changePass(creds)">
+    Change Password
+  </button>
   </span>
 </div>

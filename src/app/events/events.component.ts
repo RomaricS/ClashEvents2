@@ -47,6 +47,7 @@ export class EventsComponent implements OnInit {
         clanSelection: d.clanSelection || false,
         picture: d.picture || 'https://i.ytimg.com/vi/r2BFeSUkNCI/maxresdefault.jpg',
         startsAt: d.startsAt,
+        spinDate: d.spinDate || d.startsAt,
         active: d.active,
         townhall: d.townhall.filter(hall => hall.state),
         playersList: d.playersList
@@ -56,6 +57,10 @@ export class EventsComponent implements OnInit {
 
   delete(key: string): void {
     this.bottomSheet.open(DeleteConfirmationComponent, {data: key});
+  }
+
+  edit(event: string): void {
+    this.bottomSheet.open(EditConfirmationComponent, {data: event});
   }
 
 }
@@ -84,4 +89,90 @@ export class DeleteConfirmationComponent {
     this.bottomSheetRef.dismiss();
     event.preventDefault();
   }
+}
+
+@Component({
+  selector: 'app-edit-confirmation',
+  templateUrl: 'edit.html',
+  styleUrls: ['./events.component.scss']
+})
+export class EditConfirmationComponent {
+  townhall = [
+    {
+      level: 'th13',
+      state: false
+    },
+    {
+      level: 'th12',
+      state: false
+    },
+    {
+      level: 'th11',
+      state: false
+    },
+    {
+      level: 'th10',
+      state: false
+    },
+    {
+      level: 'th9',
+      state: false
+    },
+    {
+      level: 'th8',
+      state: false
+    },
+    {
+      level: 'th7',
+      state: false
+    }
+    ];
+
+    b: any;
+
+  constructor(private serv: EventService,
+              private bottomSheetRef: MatBottomSheetRef<EditConfirmationComponent>,
+              private snackBar: MatSnackBar,
+              @Inject(MAT_BOTTOM_SHEET_DATA) public event: any) {
+                this.serv.navBar$.next('events');
+                event.townhall = this.townhall.map( (ev) => {
+                  return {
+                    level: ev.level,
+                    state: (event.townhall.filter(res => res.level === ev.level)[0] || {}).state || false
+                  };
+                });
+                event.startsAt = new Date(event.startsAt);
+                event.spinDate = new Date(event.spinDate);
+              }
+
+  openLink(ev, e: MouseEvent): void {
+    this.cancel(e);
+    if (!ev.playersList) {
+      ev.playersList = [];
+    }
+    ev.startsAt = new Date(ev.startsAt).toLocaleDateString('en-GB');
+    ev.spinDate = new Date(ev.spinDate).toLocaleDateString('en-GB');
+    this.serv.addPlayer(ev, ev.id, ev.key);
+    this.snackBar.open('Event saved', 'Ok', {
+      duration: 2000,
+    });
+  }
+
+  cancel(event: MouseEvent): void {
+    this.bottomSheetRef.dismiss();
+    event.preventDefault();
+  }
+
+  isinValid(): boolean {
+    return !this.event.spinDate.getTime() || !this.event.startsAt.getTime();
+  }
+
+  updValue(all, th, $event) {
+    all.forEach((elt) => {
+      if (elt.level === th.level) {
+        elt.state = $event.checked;
+      }
+    });
+  }
+
 }

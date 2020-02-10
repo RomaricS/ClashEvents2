@@ -37,3 +37,19 @@
   justify-content: space-between;
 }
 
+.lvlCheck {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  overflow: hidden;
+}
+.lvlCheck .itemCheck {
+  width: 30%;
+  margin: 5px auto;
+}
+.lvlCheck .itemCheck .mat-checkbox-inner-container {
+  height: 25px !important;
+  width: 25px !important;
+}

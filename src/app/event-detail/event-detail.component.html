@@ -27,6 +27,9 @@
         <textarea matInput placeholder="Any note? Ex : Won't be there for war n°5" [(ngModel)]="playerData.comment" name="comment"></textarea>
       </mat-form-field>
     </form>
+    <div class="darkred" *ngIf="showDuplicate">
+      This player is already in the roster!!!
+    </div>
     <button
       mat-raised-button
       class="fullWidth darkBG"
@@ -46,6 +49,9 @@
   <div class="listSigned" style="overflow-x:auto;">
     <table>
       <tr class="grey">
+        <th>
+          N°
+        </th>
         <th class="frozen">
           Name
         </th>
@@ -71,7 +77,10 @@
           GOW
         </th>
       </tr>
-      <tr *ngFor="let player of dataSource">
+      <tr *ngFor="let player of dataSource; let index = index;">
+        <td>
+          {{index+1}}
+        </td>
         <td class="frozen">
           {{player.name}}
         </td>
@@ -100,7 +109,7 @@
         </td>
       </tr>
       <tr class="orangeBG grey" *ngIf="isAuth && event.clanSelection">
-        <th colspan="5"><div class="upperC centerText">Total</div></th>
+        <th colspan="6"><div class="upperC centerText">Total</div></th>
         <th>{{getUKAATotal()}}</th>
         <th>{{getFETotal()}}</th>
         <th>{{getGOWTotal()}}</th>
@@ -124,6 +133,14 @@
       color="primary"
       (click)="saveRoster()">
       Save Roster
+    </button>
+
+    <button
+    mat-raised-button
+    class="fullWidth darkBG"
+    color="primary"
+    (click)="exportRoster(dataSource)">
+    Export List
     </button>
 
     <button

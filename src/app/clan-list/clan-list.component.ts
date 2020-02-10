@@ -1,6 +1,7 @@
 import { Hall } from './../model/hall';
 import { Player } from './../model/player';
 import { Component, OnInit, Input } from '@angular/core';
+import { EventService } from '../event.service';
 
 @Component({
   selector: 'app-clan-list',
@@ -45,7 +46,7 @@ export class ClanListComponent implements OnInit {
     }
   ];
 
-  constructor() { }
+  constructor(private serv: EventService) { }
 
   ngOnInit() {
     this.stats = this.stats.filter(res => this.getActiveHall(res.level));
@@ -64,6 +65,17 @@ export class ClanListComponent implements OnInit {
       return this.halls.filter(res => res.level === level && res.state).length > 0;
     }
     return false;
+  }
+
+  exportRoster() {
+    const a = this.list.map(res => {
+      return {
+        name: res.name.toUpperCase(),
+        level: res.level.toUpperCase(),
+        comment: res.comment.toUpperCase()
+      };
+    });
+    this.serv.exportAsExcelFile(a, this.clanName);
   }
 
 }

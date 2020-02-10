@@ -1,9 +1,12 @@
 <div class="clanList" *ngIf="list.length > 0" >
   <table>
     <tr class="orangeBG grey">
-    <td colspan="4">{{ clanName }}</td>
+    <td colspan="5">{{ clanName }}</td>
     </tr>
     <tr class="grey">
+      <th>
+        N°
+      </th>
       <th class="frozen">
         Name
       </th>
@@ -17,7 +20,10 @@
         Comment
       </th>
     </tr>
-    <tr *ngFor="let player of list">
+    <tr *ngFor="let player of list; let index = index;">
+      <td>
+        {{index+1}}
+      </td>
       <td class="frozen">
         {{player.name}}
       </td>
@@ -41,5 +47,13 @@
         {{ lvl.level | uppercase }} : {{ getTotalByLevel(lvl.level) }}
     </div>
   </div>
+
+  <button
+      mat-raised-button
+      class="fullWidth darkBG"
+      color="primary"
+      (click)="exportRoster()">
+      Export List
+  </button>
 </div>
 

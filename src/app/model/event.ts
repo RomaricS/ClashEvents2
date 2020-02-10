@@ -6,6 +6,7 @@ export class Event {
   id: string;
   picture: string;
   startsAt: string;
+  spinDate: string;
   active: boolean;
   townhall: Hall[];
   playersList: Player[];

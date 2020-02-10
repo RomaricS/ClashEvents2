@@ -1,0 +1,36 @@
+<div class="deleteMsg">Edit the event?</div>
+<form class="inputs edition">
+
+  <mat-form-field>
+    <input matInput placeholder="Event Title" [(ngModel)]="event.title" name="title"/>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Event Picture (link)" [(ngModel)]="event.picture" name="picture"/>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput [matDatepicker]="picker" placeholder="Sign up will be closed on *" [(ngModel)]="event.startsAt" name="date">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker touchUi #picker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput [min]="event.startsAt" [matDatepicker]="picker2" placeholder="Spin date *" [(ngModel)]="event.spinDate" name="spinDate">
+    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+    <mat-datepicker touchUi #picker2></mat-datepicker>
+  </mat-form-field>
+
+  <mat-slide-toggle [(ngModel)]="event.clanSelection" name="clanSelection" class="clanSelection">Show Clan selection</mat-slide-toggle>
+
+  <div class="fullWidth">
+    Open to
+  <section class="lvlCheck">
+    <mat-checkbox *ngFor="let th of event.townhall" class="itemCheck" [checked]="th.state" (change)="updValue(event.townhall, th, $event)" name="townhall">{{th.level | uppercase}}</mat-checkbox>
+  </section>
+</div>
+</form>
+<div class="dltBtn">
+  <button mat-stroked-button color="primary" class="dltItem" (click)="openLink(event, $event)" [disabled]="isinValid()">Confirm</button>
+  <button mat-stroked-button color="accent" class="dltItem" (click)="cancel($event)">Cancel</button>
+</div>

@@ -8,8 +8,8 @@ import { AppRoutingModule } from './app-routing.module';
 
 // Components
 import { AppComponent } from './app.component';
-import { EventsComponent, DeleteConfirmationComponent } from './events/events.component';
-import { HomeComponent } from './home/home.component';
+import { EventsComponent, DeleteConfirmationComponent, EditConfirmationComponent } from './events/events.component';
+import { HomeComponent, EditPassComponent } from './home/home.component';
 import { EventDetailComponent } from './event-detail/event-detail.component';
 import { EventComponent } from './event/event.component';
 
@@ -48,10 +48,15 @@ import { ClanListComponent } from './clan-list/clan-list.component';
       HomeComponent,
       EventDetailComponent,
       DeleteConfirmationComponent,
+      EditConfirmationComponent,
+      EditPassComponent,
       EventComponent,
       ClanListComponent
    ],
-   entryComponents: [DeleteConfirmationComponent],
+   entryComponents: [
+      DeleteConfirmationComponent,
+      EditPassComponent,
+      EditConfirmationComponent],
    imports: [
       BrowserModule,
       BrowserAnimationsModule,

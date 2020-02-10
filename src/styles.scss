@@ -20,3 +20,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-slide-toggle.mat-checked .mat-slide-toggle-bar,.mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
   background-color: $darkred!important;
 }
+
+.edition .mat-form-field {
+  width: 100%!important;
+}
