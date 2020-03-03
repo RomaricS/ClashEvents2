@@ -30,7 +30,7 @@ export class EventsComponent implements OnInit {
   loadEvents() {
     this.serv.getEvents().subscribe(res => {
       if (res && res.length > 0) {
-        this.eventList = res.map(this.castData, this).filter(ev => ev.active);
+        this.eventList = res.map(this.castData, this);
       } else {
         this.showEv = false;
         console.log('NO DATA');
