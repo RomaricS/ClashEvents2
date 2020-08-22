@@ -1,5 +1,5 @@
 <div *ngIf="event">
-  <div class="formulaire" *ngIf="showForm && event.active" >
+  <div class="formulaire" *ngIf="showForm && event.active || isAuth" >
     <div class="dltBtn">
       <h2 class="centerText mobCenter">Sign up for <span class="darkred">{{ event.title }}</span></h2>
       <div *ngIf="event.picture" class="artParent">
@@ -7,7 +7,8 @@
       </div>
     </div>
     <div>
-        The list will be closed  : <span class="orange">{{ event.startsAt }}</span>
+        <span *ngIf="event.active" >The list will be closed  : <span class="orange">{{ event.startsAt }}</span></span>
+        <span *ngIf="!event.active" >The list is closed but as an admin you can keep adding players</span>
       </div>
     <form class="inputs">
       <mat-form-field>

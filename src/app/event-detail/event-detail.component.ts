@@ -116,7 +116,7 @@ export class EventDetailComponent implements OnInit {
   }
 
   checkName(name): boolean {
-    if (this.dataSource){
+    if (this.dataSource) {
       if (this.dataSource.find(obj => {
       return obj.name.toUpperCase() === name.toUpperCase();
       })) {
